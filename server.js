@@ -1,7 +1,14 @@
 import express from "express"
 import cors from 'cors'
 import 'dotenv/config'
-import connectDB from "./config/db.js"
+import connectDB from "./config/db.js";
+
+if (process.env.MONGO_URI) {
+  connectDB();
+} else {
+  console.log("⚠️ No MongoDB URI provided. Skipping database connection...");
+}
+
 import authRoutes from './routes/authRoutes.js'
 import leaveRoutes from './routes/leaveRoutes.js'
 
